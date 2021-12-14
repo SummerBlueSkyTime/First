@@ -31,7 +31,7 @@ int exist(struct book * abs,string name){
     return -1;//不存在的情况
 }
 
-//加载文件内容 
+
 void loan_file(struct book *abs)
 {
 	struct person tmp;//临时结构体 
