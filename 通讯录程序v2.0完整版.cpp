@@ -4,44 +4,44 @@
 #define SIZE 1000
 using namespace std;
 
-//ÁªÏµÈË½á¹¹Ìå
+
 struct person{
-    char p_name[10];//ĞÕÃû 
-    char p_address[10];//¼®¹á 
-    char p_phone1[10];//µç»°1 
-    char p_phone2[10];//µç»°2 
-    char p_Email[10];//µç×ÓÓÊ¼ş 
+    char p_name[10];//å§“å 
+    char p_address[10];//ç±è´¯ 
+    char p_phone1[10];//ç”µè¯1 
+    char p_phone2[10];//ç”µè¯2 
+    char p_Email[10];//ç”µå­é‚®ä»¶ 
 };
-//µç»°±¾½á¹¹Ìå
+
 struct book
 {
     struct person p[MAX];
     int num;
 };
 
-//ÅĞ¶Ïº¯Êı£¬ÅĞ¶Ï¸ÃÁªÏµÈËÊÇ·ñ´æÔÚ£¬²¢·µ»Ø´æÔÚµØÖ·£¨´Ó0¿ªÊ¼£©£¬²»´æÔÚ·µ»Ø-1
+//åˆ¤æ–­å‡½æ•°ï¼Œåˆ¤æ–­è¯¥è”ç³»äººæ˜¯å¦å­˜åœ¨ï¼Œå¹¶è¿”å›å­˜åœ¨åœ°å€ï¼ˆä»0å¼€å§‹ï¼‰ï¼Œä¸å­˜åœ¨è¿”å›-1
 int exist(struct book * abs,string name){
     for(int i=0;i<abs->num;i++)
     {
-        if(abs->p[i].p_name==name)//ÅĞ¶ÏÊÇ·ñ´æÔÚ
+        if(abs->p[i].p_name==name)//åˆ¤æ–­æ˜¯å¦å­˜åœ¨
         {
-            return i;//·µ»ØµØÖ·
+            return i;//è¿”å›åœ°å€
         }
     }
-    return -1;//²»´æÔÚµÄÇé¿ö
+    return -1;//ä¸å­˜åœ¨çš„æƒ…å†µ
 }
 
-//¼ÓÔØÎÄ¼şÄÚÈİ 
+//åŠ è½½æ–‡ä»¶å†…å®¹ 
 void loan_file(struct book *abs)
 {
-	struct person tmp;//ÁÙÊ±½á¹¹Ìå 
-	FILE *fp;//ÎÄ¼şÖ¸Õë 
+	struct person tmp;//ä¸´æ—¶ç»“æ„ä½“ 
+	FILE *fp;//æ–‡ä»¶æŒ‡é’ˆ 
 	
-if((fp=fopen("file_book.dat","rb+"))==NULL)//´ò¿ªÊäÈëÎÄ¼ş 
+if((fp=fopen("file_book.dat","rb+"))==NULL)//æ‰“å¼€è¾“å…¥æ–‡ä»¶ 
 	{
 		fp=fopen("file_book.dat","wb+");
 		return ;
-	 }//ÓÃÖ»¶Á¶ş½øÖÆ´ò¿ªÎÄ¼ş 
+	 }//ç”¨åªè¯»äºŒè¿›åˆ¶æ‰“å¼€æ–‡ä»¶ 
 	
 	while(fread(&tmp,sizeof(struct person),1,fp))
 	{
@@ -51,7 +51,7 @@ if((fp=fopen("file_book.dat","rb+"))==NULL)//´ò¿ªÊäÈëÎÄ¼ş
 	
 	fclose(fp);
 }
-//ÉÏ´«½á¹¹ÌåÄÚÈİ
+//ä¸Šä¼ ç»“æ„ä½“å†…å®¹
 void up_file(struct book *abs) 
 {
 	
@@ -59,83 +59,83 @@ void up_file(struct book *abs)
 	fp=fopen("file_book.dat","wb+"); 
 	
 	for(int i=0;i<abs->num;i++)
-		fwrite(&(abs->p[i]),sizeof(struct person),1,fp);//Ğ´Èëp 
+		fwrite(&(abs->p[i]),sizeof(struct person),1,fp);//å†™å…¥p 
 	
 	
 	
 	fclose(fp);
 
 }
-//ÒÔÏÂÎªÊµÏÖ¹¦ÄÜµÄº¯Êı
+//ä»¥ä¸‹ä¸ºå®ç°åŠŸèƒ½çš„å‡½æ•°
 
-//Ìí¼ÓÁªÏµÈË
+//æ·»åŠ è”ç³»äºº
 void add_person(struct book * abs)
 {
     char name[10];
-    cout<<"ÇëÊäÈëĞÕÃû"<<endl;
+    cout<<"è¯·è¾“å…¥å§“å"<<endl;
     cin>>name;
     strcpy(abs->p[abs->num].p_name,name); 
     char address[10];
-    cout<<"ÇëÊäÈë¼®¹á"<<endl;
+    cout<<"è¯·è¾“å…¥ç±è´¯"<<endl;
     cin>>address;
     strcpy(abs->p[abs->num].p_address,address);
     char phone1[10],phone2[10];
-    cout<<"ÇëÊäÈëµÚÒ»¸öµç»°ºÅÂë"<<endl;
+    cout<<"è¯·è¾“å…¥ç¬¬ä¸€ä¸ªç”µè¯å·ç "<<endl;
     cin>>phone1;
     strcpy(abs->p[abs->num].p_phone1,phone1);
-    cout<<"ÇëÊäÈëµÚ¶ş¸öµç»°ºÅÂë"<<endl;
+    cout<<"è¯·è¾“å…¥ç¬¬äºŒä¸ªç”µè¯å·ç "<<endl;
     cin>>phone2;
     strcpy(abs->p[abs->num].p_phone2,phone2);
     char Email[10];
-    cout<<"ÇëÊäÈëµç×ÓÓÊ¼ş"<<endl;
+    cout<<"è¯·è¾“å…¥ç”µå­é‚®ä»¶"<<endl;
     cin>>Email;
     strcpy(abs->p[abs->num].p_Email,Email);
-    abs->num++;//num¼È³äµ±ÁËÊı×éºÅ£¬ÓÖÓĞÍ³¼ÆµÄ¹¦ÄÜ 
+    abs->num++;//numæ—¢å……å½“äº†æ•°ç»„å·ï¼Œåˆæœ‰ç»Ÿè®¡çš„åŠŸèƒ½ 
 }
  
-//ĞŞ¸ÄÁªÏµÈË 
+//ä¿®æ”¹è”ç³»äºº 
 void change_person(struct book *abs)
 {
-    int exist(struct book * abs,string name);//ÉùÃ÷
+    int exist(struct book * abs,string name);//å£°æ˜
     char name[10];
-    cout<<"ÇëÊäÈëÒªĞŞ¸ÄµÄÁªÏµÈËµÄĞÕÃû£º";
+    cout<<"è¯·è¾“å…¥è¦ä¿®æ”¹çš„è”ç³»äººçš„å§“åï¼š";
     cin>>name;
-    //ÅĞ¶ÏÊÇ·ñ´æÔÚ
-    int x=exist(abs,name);//µØÖ·
-    if(x!=-1)//¿ªÊ¼½øĞĞĞŞ¸Ä 
+    //åˆ¤æ–­æ˜¯å¦å­˜åœ¨
+    int x=exist(abs,name);//åœ°å€
+    if(x!=-1)//å¼€å§‹è¿›è¡Œä¿®æ”¹ 
     {
-    cout<<"ÇëÊäÈëĞÕÃû"<<endl;
+    cout<<"è¯·è¾“å…¥å§“å"<<endl;
     cin>>name;
     strcpy(abs->p[x].p_name,name);
     char address[10];
-    cout<<"ÇëÊäÈë¼®¹á"<<endl;
+    cout<<"è¯·è¾“å…¥ç±è´¯"<<endl;
     cin>>address;
     strcpy(abs->p[x].p_address,address);
     char phone1[10],phone2[10];
-    cout<<"ÇëÊäÈëµÚÒ»¸öµç»°ºÅÂë"<<endl;
+    cout<<"è¯·è¾“å…¥ç¬¬ä¸€ä¸ªç”µè¯å·ç "<<endl;
     cin>>phone1;
     strcpy(abs->p[x].p_phone1,phone1);
-    cout<<"ÇëÊäÈëµÚ¶ş¸öµç»°ºÅÂë"<<endl;
+    cout<<"è¯·è¾“å…¥ç¬¬äºŒä¸ªç”µè¯å·ç "<<endl;
     cin>>phone2;
     strcpy(abs->p[x].p_phone2,phone2);
     char Email[10];
-    cout<<"ÇëÊäÈëµç×ÓÓÊ¼ş"<<endl;
+    cout<<"è¯·è¾“å…¥ç”µå­é‚®ä»¶"<<endl;
     cin>>Email;
     strcpy(abs->p[x].p_Email,Email);
     }
-    else cout<<"²éÎŞ´ËÈË";
+    else cout<<"æŸ¥æ— æ­¤äºº";
     
 }
 
-//É¾³ıÁªÏµÈË
+//åˆ é™¤è”ç³»äºº
 void delete_person(struct book *abs)
 {
-    int exist(struct book * abs,string name);//ÉùÃ÷
+    int exist(struct book * abs,string name);//å£°æ˜
     string name;
-    cout<<"ÇëÊäÈëÒªÉ¾³ıÈËµÄÃû×Ö£º";
-    cin>>name;//ÅĞ¶ÏÊÇ·ñ´æÔÚ
-    int x=exist(abs,name);//µØÖ·
-    if(x!=-1)//½«ºóÒ»ÏîÖµ¸³¸øÇ°Ò»Ïî£¬²¢Ö»¸³Öµµ½µ¹ÊıµÚÒ»¸ö¸³Öµ¸øµ¹ÊıµÚ¶ş¸ö£¬ÒÔ·À³öÏÖÁ½¸ö×îºóÒ»¸öÊı 
+    cout<<"è¯·è¾“å…¥è¦åˆ é™¤äººçš„åå­—ï¼š";
+    cin>>name;//åˆ¤æ–­æ˜¯å¦å­˜åœ¨
+    int x=exist(abs,name);//åœ°å€
+    if(x!=-1)//å°†åä¸€é¡¹å€¼èµ‹ç»™å‰ä¸€é¡¹ï¼Œå¹¶åªèµ‹å€¼åˆ°å€’æ•°ç¬¬ä¸€ä¸ªèµ‹å€¼ç»™å€’æ•°ç¬¬äºŒä¸ªï¼Œä»¥é˜²å‡ºç°ä¸¤ä¸ªæœ€åä¸€ä¸ªæ•° 
     {
         for(int i=x;i<abs->num;i++)
         {
@@ -144,78 +144,78 @@ void delete_person(struct book *abs)
         }
     }
     else 
-    cout <<"²éÎŞ´ËÈË"<<endl;
+    cout <<"æŸ¥æ— æ­¤äºº"<<endl;
 
 }
 
-//²Ëµ¥¹¦ÄÜ 
+//èœå•åŠŸèƒ½ 
 void menu()
 {
     cout<<"******************************"<<endl;
-    cout<<"1¡¢Ìí¼ÓÁªÏµÈË"<<"  2¡¢²é¿´Í¨Ñ¶Â¼"<<endl;
-    cout<<"3¡¢²éÕÒÁªÏµÈË"<<"  4¡¢É¾³ıÁªÏµÈË"<<endl;
-    cout<<"5¡¢ĞŞ¸ÄÁªÏµÈË"<<"  6¡¢ÍË³ö¸ÃÏµÍ³"<<endl;
+    cout<<"1ã€æ·»åŠ è”ç³»äºº"<<"  2ã€æŸ¥çœ‹é€šè®¯å½•"<<endl;
+    cout<<"3ã€æŸ¥æ‰¾è”ç³»äºº"<<"  4ã€åˆ é™¤è”ç³»äºº"<<endl;
+    cout<<"5ã€ä¿®æ”¹è”ç³»äºº"<<"  6ã€é€€å‡ºè¯¥ç³»ç»Ÿ"<<endl;
     cout<<"******************************"<<endl;
 }
 
-//²é¿´ÁªÏµÈË 
+//æŸ¥çœ‹è”ç³»äºº 
 void check_book(struct book * abs)
 {
-	if(abs->num==0)//¼ì²éÍ¨Ñ¶Â¼ÀïµÄÈËÊı£¬Èç¹ûÎª0£¬ÌáÊ¾Îª¿Õ 
-	cout<<"Í¨Ñ¶Â¼Îª¿Õ"<<endl;
-	else//ÒÀ´ÎÊä³öÍ¨Ñ¶Â¼ÀïµÄÈËÔ±ĞÅÏ¢ 
+	if(abs->num==0)//æ£€æŸ¥é€šè®¯å½•é‡Œçš„äººæ•°ï¼Œå¦‚æœä¸º0ï¼Œæç¤ºä¸ºç©º 
+	cout<<"é€šè®¯å½•ä¸ºç©º"<<endl;
+	else//ä¾æ¬¡è¾“å‡ºé€šè®¯å½•é‡Œçš„äººå‘˜ä¿¡æ¯ 
 	{
 		for(int i=0;i<abs->num;i++)
 		{
-			cout<<"ĞÕÃû£º"<<abs->p[i].p_name<<endl;
-			cout<<"¼®¹á£º"<<abs->p[i].p_address<<endl;
-			cout<<"µç»°1£º"<<abs->p[i].p_phone1<<endl;
-			cout<<"µç»°2£º"<<abs->p[i].p_phone2<<endl;
-			cout<<"µç×ÓÓÊÏä£º"<<abs->p[i].p_Email<<endl;
+			cout<<"å§“åï¼š"<<abs->p[i].p_name<<endl;
+			cout<<"ç±è´¯ï¼š"<<abs->p[i].p_address<<endl;
+			cout<<"ç”µè¯1ï¼š"<<abs->p[i].p_phone1<<endl;
+			cout<<"ç”µè¯2ï¼š"<<abs->p[i].p_phone2<<endl;
+			cout<<"ç”µå­é‚®ç®±ï¼š"<<abs->p[i].p_Email<<endl;
 			cout<<" "<<endl;
 			
 		}
 	 } 
 }
 
-//²éÕÒÁªÏµÈË 
+//æŸ¥æ‰¾è”ç³»äºº 
 void cheak_person(struct book * abs,string name)
 
 {
 	
-	int r= exist(abs,name);//ÏÈÅĞ¶ÏÊÇ·ñ´æÔÚ´ËÈË£¬Èç²»´æÔÚ£¬ÌáÊ¾ÎªÎŞ 
-	if(r!=-1)//ÕÒµ½ÈËºóÒÀ´ÎÊä³ö 
+	int r= exist(abs,name);//å…ˆåˆ¤æ–­æ˜¯å¦å­˜åœ¨æ­¤äººï¼Œå¦‚ä¸å­˜åœ¨ï¼Œæç¤ºä¸ºæ—  
+	if(r!=-1)//æ‰¾åˆ°äººåä¾æ¬¡è¾“å‡º 
 	{
-		cout<<"ĞÕÃû£º"<<abs->p[r].p_name<<endl;
-		cout<<"¼®¹á£º"<<abs->p[r].p_address<<endl;
-		cout<<"µç»°1£º"<<abs->p[r].p_phone1<<endl;
-		cout<<"µç»°2£º"<<abs->p[r].p_phone2<<endl;
-		cout<<"µç×ÓÓÊ¼ş£º"<<abs->p[r].p_Email<<endl;
+		cout<<"å§“åï¼š"<<abs->p[r].p_name<<endl;
+		cout<<"ç±è´¯ï¼š"<<abs->p[r].p_address<<endl;
+		cout<<"ç”µè¯1ï¼š"<<abs->p[r].p_phone1<<endl;
+		cout<<"ç”µè¯2ï¼š"<<abs->p[r].p_phone2<<endl;
+		cout<<"ç”µå­é‚®ä»¶ï¼š"<<abs->p[r].p_Email<<endl;
 		 
 	}
-	else//Î´ÕÒµ½ÈË 
-	cout<<"Î´ÕÒµ½ÁªÏµÈË"<<endl; 
+	else//æœªæ‰¾åˆ°äºº 
+	cout<<"æœªæ‰¾åˆ°è”ç³»äºº"<<endl; 
 	  
 }
    
     
 
- //Ö÷º¯Êı
+ //ä¸»å‡½æ•°
  int main()
 {
 
     int s;
-    struct book abs;//Í¨Ñ¶Â¼½á¹¹Ìå±äÁ¿
+    struct book abs;//é€šè®¯å½•ç»“æ„ä½“å˜é‡
     abs.num=0;
   	loan_file(&abs);
-    while(1)//ÎŞÏŞÑ­»·£¬È·±£ÄÜÒ»Ö±Ö´ĞĞÃüÁî 
+    while(1)//æ— é™å¾ªç¯ï¼Œç¡®ä¿èƒ½ä¸€ç›´æ‰§è¡Œå‘½ä»¤ 
     {
     
        menu();
        cin>>s;
        switch(s)
        {
-        case 1://1¡¢Ìí¼ÓÁªÏµÈË(Íê³É)
+        case 1://1ã€æ·»åŠ è”ç³»äºº(å®Œæˆ)
            {
            	
                add_person(&abs);
@@ -224,7 +224,7 @@ void cheak_person(struct book * abs,string name)
                 system("cls");
            }
             break;
-        case 2://2¡¢²é¿´Í¨Ñ¶Â¼(Íê³É) 
+        case 2://2ã€æŸ¥çœ‹é€šè®¯å½•(å®Œæˆ) 
         {
 		    check_book(&abs); 
 		    system("pause");
@@ -232,34 +232,34 @@ void cheak_person(struct book * abs,string name)
 		
 		}
             break;
-        case 3://3¡¢²éÕÒÁªÏµÈË(Íê³É) 
+        case 3://3ã€æŸ¥æ‰¾è”ç³»äºº(å®Œæˆ) 
 		{
 			string name;
-		cout<<"ÇëÊäÈëĞÕÃû"<<endl;
+		cout<<"è¯·è¾“å…¥å§“å"<<endl;
 	    cin>>name;
 	    cheak_person(&abs,name);
 	    system("pause");
 	    system("cls");
 		}
             break;
-        case 4://4¡¢É¾³ıÁªÏµÈË(Íê³É)
+        case 4://4ã€åˆ é™¤è”ç³»äºº(å®Œæˆ)
         {
             delete_person(&abs);
             system("pause");
             system("cls");
         }
             break;
-        case 5://5¡¢ĞŞ¸ÄÁªÏµÈË
+        case 5://5ã€ä¿®æ”¹è”ç³»äºº
         {
             change_person(&abs);
             system("pause") ;
             system("cls");
         }
             break;
-        case 6://6¡¢ÍË³ö¸ÃÏµÍ³£¨Íê³É£©
+        case 6://6ã€é€€å‡ºè¯¥ç³»ç»Ÿï¼ˆå®Œæˆï¼‰
         {
-        	cout<<"ÒÑ±£´æ "; 
-            cout<<"»¶Ó­ÄúÏÂ´ÎÊ¹ÓÃ"<<endl;
+        	cout<<"å·²ä¿å­˜ "; 
+            cout<<"æ¬¢è¿æ‚¨ä¸‹æ¬¡ä½¿ç”¨"<<endl;
             up_file(&abs);
             return 0;
         }
